@@ -1,17 +1,36 @@
 package org.hq.hdtzsc;
 
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+                getSupportFragmentManager(), FragmentPagerItems.with(this)
+                .add(R.string.tab_home, HomePageFragment.class)
+                .add(R.string.tab_sort, HomePageFragment.class)
+                .add(R.string.tab_mine, HomePageFragment.class)
+                .add(R.string.tab_more, HomePageFragment.class)
+                .create());
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.vpContent);
+        viewPager.setAdapter(adapter);
+
+        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.stlTab);
+        viewPagerTab.setViewPager(viewPager);
     }
 
     @Override
