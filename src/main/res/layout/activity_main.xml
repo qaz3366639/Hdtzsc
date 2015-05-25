@@ -13,26 +13,24 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/material_blue_grey_800" />
     <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/stlTab"
-        app:stl_defaultTabBackground="@drawable/list_tab_bg"
         app:stl_defaultTabTextAllCaps="true"
         app:stl_defaultTabTextColor="#FC000000"
-        app:stl_defaultTabTextHorizontalPadding="16dp"
         app:stl_defaultTabTextMinWidth="0dp"
         app:stl_defaultTabTextSize="12sp"
         app:stl_distributeEvenly="true"
-        app:stl_dividerColor="#4D000000"
-        app:stl_dividerThickness="1dp"
-        app:stl_indicatorAlwaysInCenter="false"
+        app:stl_defaultTabBackground="@color/tab_bg"
+        app:stl_customTabTextLayoutId="@layout/item_tab"
+        app:stl_customTabTextViewId="@+id/tvTab"
         app:stl_indicatorColor="#40C4FF"
+        app:stl_indicatorThickness="@dimen/tab_indicator_h"
         app:stl_indicatorCornerRadius="2dp"
-        app:stl_indicatorInFront="true"
-        app:stl_indicatorInterpolation="@null"
-        app:stl_indicatorThickness="4dp"
-        app:stl_underlineColor="#4D000000"
-        app:stl_underlineThickness="1dp"
         android:layout_width="match_parent"
-        android:layout_height="48dp"/>
+        android:layout_height="wrap_content"/>
     <!--app:stl_customTabTextLayoutId="@drawable/ic_launcher"-->
 </LinearLayout>

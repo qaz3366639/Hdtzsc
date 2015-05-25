@@ -1,6 +1,10 @@
 package org.hq.hdtzsc;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Description:
@@ -8,4 +12,10 @@ import android.support.v4.app.Fragment;
  * Date: 2015-05-25 11:13
  */
 public class MoreFragment extends Fragment {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_more, container, false);
+        return view;
+    }
 }
