@@ -20,12 +20,11 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.tab_home, HomePageFragment.class)
-                .add(R.string.tab_sort, HomePageFragment.class)
-                .add(R.string.tab_mine, HomePageFragment.class)
-                .add(R.string.tab_more, HomePageFragment.class)
+                .add("", HomePageFragment.class)
+                .add("", SortFragment.class)
+                .add("", MineFragment.class)
+                .add("", MoreFragment.class)
                 .create());
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpContent);
         viewPager.setAdapter(adapter);
 
