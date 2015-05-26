@@ -20,17 +20,12 @@
     <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/stlTab"
         app:stl_defaultTabTextAllCaps="true"
-        app:stl_defaultTabTextColor="#FC000000"
-        app:stl_defaultTabTextMinWidth="0dp"
-        app:stl_defaultTabTextSize="12sp"
         app:stl_distributeEvenly="true"
-        app:stl_defaultTabBackground="@color/tab_bg"
-        app:stl_customTabTextLayoutId="@layout/item_tab"
-        app:stl_customTabTextViewId="@+id/tvTab"
-        app:stl_indicatorColor="#40C4FF"
+        app:stl_indicatorColor="@color/tab_selected"
         app:stl_indicatorThickness="@dimen/tab_indicator_h"
         app:stl_indicatorCornerRadius="2dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/tab_bg"/>
     <!--app:stl_customTabTextLayoutId="@drawable/ic_launcher"-->
 </LinearLayout>

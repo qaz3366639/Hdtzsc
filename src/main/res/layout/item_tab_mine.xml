@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/tab_indicator_h">
 
     <ImageView
         android:id="@+id/ivTab"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="2dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_tab_mine"/>
 
     <TextView
         android:id="@+id/tvTab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:textColor="@drawable/selector_tab_text"/>
 </LinearLayout>

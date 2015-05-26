@@ -3,13 +3,12 @@ package org.hq.hdtzsc;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -19,7 +18,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 public class MainActivity extends FragmentActivity {
 
-    private int[] layout = new int[]{R.drawable.selector_tab_homepage, R.drawable.selector_tab_sort, R.drawable.selector_tab_mine, R.drawable.selector_tab_more};
+    private int[] layout = new int[]{R.layout.item_tab_homepage, R.layout.item_tab_sort, R.layout.item_tab_mine, R.layout.item_tab_more};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +26,10 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.tab_home, HomePageFragment.class)
-                .add(R.string.tab_sort, SortFragment.class)
-                .add(R.string.tab_mine, MineFragment.class)
-                .add(R.string.tab_more, MoreFragment.class)
+                .add(null, HomePageFragment.class)
+                .add(null, SortFragment.class)
+                .add(null, MineFragment.class)
+                .add(null, MoreFragment.class)
                 .create());
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpContent);
         viewPager.setAdapter(adapter);
@@ -39,9 +38,17 @@ public class MainActivity extends FragmentActivity {
         viewPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
             @Override
             public View createTabView(ViewGroup viewGroup, int i, PagerAdapter pagerAdapter) {
-                ImageView imageView = (ImageView) viewGroup.findViewById(R.id.ivTab);
-//                imageView.setBackgroundDrawable(getDrawable(layout[i]));
-                return viewGroup;
+                View tabView = LayoutInflater.from(MainActivity.this).inflate(layout[i], viewGroup, false);
+                TextView tabTitleView = null;
+
+                if(tabView != null) {
+                    tabTitleView = (TextView)tabView.findViewById(R.id.tvTab);
+                }
+
+                if (tabTitleView != null) {
+                    tabTitleView.setText(getResources().getStringArray(R.array.tab_string_list)[i]);
+                }
+                return tabView;
             }
         });
         viewPagerTab.setViewPager(viewPager);
