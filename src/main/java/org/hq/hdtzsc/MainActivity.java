@@ -34,6 +34,7 @@ public class MainActivity extends FragmentActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpContent);
         viewPager.setAdapter(adapter);
 
+        //设置底部tab
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.stlTab);
         viewPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
             @Override
