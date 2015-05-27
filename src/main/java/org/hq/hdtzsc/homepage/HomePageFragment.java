@@ -1,20 +1,26 @@
 package org.hq.hdtzsc.homepage;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.ViewPagerItem;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import org.hq.hdtzsc.R;
+import org.hq.hdtzsc.widget.SingleImageFragment;
+
+import java.lang.ref.WeakReference;
+import java.util.Timer;
 
 /**
  * Description:
@@ -46,7 +52,12 @@ public class HomePageFragment extends Fragment {
     /**
      * 广告栏数据适配器
      */
-    private ViewPagerItemAdapter viewPagerItemAdapter;
+    private FragmentPagerItemAdapter fragmentPagerItemAdapter;
+    /**
+     * 轮播广告图片间隔
+     */
+    private long lCarouselAdInterval = 1000L;
+    private WeakReference<Handler> carouselAdHandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,30 +72,29 @@ public class HomePageFragment extends Fragment {
      * 初始化广告栏
      */
     private void initAd() {
-        ViewPagerItems.Creator creator = ViewPagerItems.with(getActivity());
+        FragmentPagerItems.Creator creator = FragmentPagerItems.with(getActivity());
         for (String url : adUrls) {
-            creator.add("", R.layout.ietm_home_page_ad);
+            Bundle bundle = new Bundle();
+            bundle.putString(SingleImageFragment.IMAGE_URL_KEY, url);
+            creator.add("", SingleImageFragment.class, bundle);
         }
 
-        viewPagerItemAdapter = new ViewPagerItemAdapter(creator.create());
-        vpAd.setAdapter(viewPagerItemAdapter);
+        fragmentPagerItemAdapter = new FragmentPagerItemAdapter(getChildFragmentManager(), creator.create());
+        vpAd.setAdapter(fragmentPagerItemAdapter);
         stlAdTab.setViewPager(vpAd);
-        stlAdTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    }
+
+    /**
+     * 开始轮播广告图片
+     */
+    private void startCarouselAd() {
+        carouselAdHandler = new WeakReference<Handler>(new Handler(Looper.myLooper()){
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                ImageLoader.getInstance().displayImage(adUrls[position],
-                        (ImageView) viewPagerItemAdapter.getPage(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+//                postDelayed()
             }
         });
+
     }
 }

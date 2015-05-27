@@ -30,7 +30,7 @@ public class MyApplication extends Application {
                 .defaultDisplayImageOptions(options)
                 .denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())
-                .diskCacheSize(1000 * 1024 * 1024) // 100 Mb
+                .diskCacheSize(100 * 1024 * 1024) // 100 Mb
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(configuration);
     }
