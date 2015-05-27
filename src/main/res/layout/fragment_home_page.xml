@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="home"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpAd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            android:id="@+id/stlAdTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:stl_customTabTextLayoutId="@layout/item_home_page_ad_indicator"
+            app:stl_dividerThickness="0dp"
+            app:stl_indicatorColor="@color/tab_selected"
+            app:stl_defaultTabTextHorizontalPadding="0dp"
+            app:stl_indicatorThickness="@dimen/home_page_ad_indicator_dia"
+            app:stl_indicatorCornerRadius="@dimen/home_page_ad_indicator_rd"
+            android:layout_marginBottom="4dp"/>
+    </RelativeLayout>
 </LinearLayout>

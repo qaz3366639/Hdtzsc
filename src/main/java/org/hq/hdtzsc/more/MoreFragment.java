@@ -1,4 +1,4 @@
-package org.hq.hdtzsc;
+package org.hq.hdtzsc.more;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,20 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.hq.hdtzsc.R;
+
 /**
  * Description:
- * Author: WuRuiqiang
- * CreateDate: 2015/5/25-2:04
- * UpdateUser:
- * UpdateDate:
- * UpdateRemark:
- * Version: [v1.0]
+ * Author: WuRuiqiang(263454190@qq.com)
+ * Date: 2015-05-25 11:13
  */
-public class HomePageFragment extends Fragment {
+public class MoreFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_more, container, false);
         return view;
     }
 }

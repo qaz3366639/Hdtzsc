@@ -4,4 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="tab_indicator_h">4dp</dimen>
+
+    <dimen name="home_page_ad_indicator_rd">5dp</dimen>
+    <dimen name="home_page_ad_indicator_dia">10dp</dimen>
 </resources>

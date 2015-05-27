@@ -15,6 +15,11 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import org.hq.hdtzsc.homepage.HomePageFragment;
+import org.hq.hdtzsc.mine.MineFragment;
+import org.hq.hdtzsc.more.MoreFragment;
+import org.hq.hdtzsc.sort.SortFragment;
+
 
 public class MainActivity extends FragmentActivity {
 
