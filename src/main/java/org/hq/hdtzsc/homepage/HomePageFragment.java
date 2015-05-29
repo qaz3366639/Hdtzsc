@@ -45,10 +45,10 @@ public class HomePageFragment extends Fragment {
      * 广告图片Url地址
      */
     private String[] adUrls = new String[]{"http://pic.58pic.com/58pic/16/76/08/17M58PICu9V_1024.jpg",
-            "http://pic.58pic.com/58pic/16/76/08/17M58PICu9V_1024.jpg",
-            "http://pic.58pic.com/58pic/16/76/08/17M58PICu9V_1024.jpg",
-            "http://pic.58pic.com/58pic/16/76/08/17M58PICu9V_1024.jpg",
-            "http://pic.58pic.com/58pic/16/76/08/17M58PICu9V_1024.jpg"};
+            "http://pic4.nipic.com/20091021/2647736_112912049567_2.jpg",
+            "http://pic5.nipic.com/20100226/4174632_102000007517_2.jpg",
+            "http://pic12.nipic.com/20110211/3334559_094414394318_2.jpg",
+            "http://pic7.nipic.com/20100617/2318085_152320096158_2.jpg"};
     /**
      * 广告栏数据适配器
      */
@@ -58,6 +58,7 @@ public class HomePageFragment extends Fragment {
      */
     private long lCarouselAdInterval = 1000L;
     private WeakReference<Handler> carouselAdHandler;
+    private Runnable carouselAdRunnable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class HomePageFragment extends Fragment {
         stlAdTab = (SmartTabLayout) view.findViewById(R.id.stlAdTab);
         vpAd = (ViewPager) view.findViewById(R.id.vpAd);
         initAd();
+        startCarouselAd();
         return view;
     }
 
@@ -88,13 +90,14 @@ public class HomePageFragment extends Fragment {
      * 开始轮播广告图片
      */
     private void startCarouselAd() {
-        carouselAdHandler = new WeakReference<Handler>(new Handler(Looper.myLooper()){
+        carouselAdRunnable = new Runnable() {
             @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-//                postDelayed()
+            public void run() {
+                vpAd.setCurrentItem((vpAd.getCurrentItem() + 1) % fragmentPagerItemAdapter.getCount(), false);
+                carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
             }
-        });
-
+        };
+        carouselAdHandler = new WeakReference<>(new Handler());
+        carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
     }
 }
