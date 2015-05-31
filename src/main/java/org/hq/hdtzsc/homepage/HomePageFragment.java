@@ -17,6 +17,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import org.hq.hdtzsc.R;
+import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.widget.SingleImageFragment;
 
 import java.lang.ref.WeakReference;
@@ -31,7 +32,7 @@ import java.util.Timer;
  * UpdateRemark:
  * Version: [v1.0]
  */
-public class HomePageFragment extends Fragment {
+public class HomePageFragment extends BaseFragment {
 
     /**
      * 广告栏导航圆点
@@ -56,7 +57,7 @@ public class HomePageFragment extends Fragment {
     /**
      * 轮播广告图片间隔
      */
-    private long lCarouselAdInterval = 1000L;
+    private long lCarouselAdInterval = 2000L;
     private WeakReference<Handler> carouselAdHandler;
     private Runnable carouselAdRunnable;
 
