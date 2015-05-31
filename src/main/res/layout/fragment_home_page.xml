@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<in.srain.cube.views.ptr.PtrFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pflTitle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp">
-        
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpAd"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        
-        <com.ogaclejapan.smarttablayout.SmartTabLayout
-            android:id="@+id/stlAdTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            app:stl_customTabTextLayoutId="@layout/item_home_page_ad_indicator"
-            app:stl_dividerThickness="0dp"
-            app:stl_indicatorColor="@color/tab_selected"
-            app:stl_defaultTabTextHorizontalPadding="0dp"
-            app:stl_indicatorThickness="@dimen/home_page_ad_indicator_dia"
-            app:stl_indicatorCornerRadius="@dimen/home_page_ad_indicator_rd"
-            android:layout_marginBottom="4dp"/>
-    </RelativeLayout>
-</LinearLayout>
+            android:layout_height="120dp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpAd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.ogaclejapan.smarttablayout.SmartTabLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/stlAdTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                app:stl_customTabTextLayoutId="@layout/item_home_page_ad_indicator"
+                app:stl_dividerThickness="0dp"
+                app:stl_indicatorColor="@color/tab_selected"
+                app:stl_defaultTabTextHorizontalPadding="0dp"
+                app:stl_indicatorThickness="@dimen/home_page_ad_indicator_dia"
+                app:stl_indicatorCornerRadius="@dimen/home_page_ad_indicator_rd"
+                android:layout_marginBottom="4dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+</in.srain.cube.views.ptr.PtrFrameLayout>
