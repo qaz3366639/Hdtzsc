@@ -3,8 +3,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="title_h">48dp</dimen>
+
+    <dimen name="title_text_size">18sp</dimen>
+
     <dimen name="tab_indicator_h">4dp</dimen>
 
     <dimen name="home_page_ad_indicator_rd">5dp</dimen>
     <dimen name="home_page_ad_indicator_dia">10dp</dimen>
+    <!-- 登录输入栏padding-->
+    <dimen name="login_input_pad">15dp</dimen>
 </resources>

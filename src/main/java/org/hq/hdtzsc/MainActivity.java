@@ -24,23 +24,58 @@ import org.hq.hdtzsc.sort.SortFragment;
 public class MainActivity extends FragmentActivity {
 
     private int[] layout = new int[]{R.layout.item_tab_homepage, R.layout.item_tab_sort, R.layout.item_tab_mine, R.layout.item_tab_more};
+    /**
+     * 底部四个fragment数据适配器
+     */
+    private FragmentPagerItemAdapter adapter;
+    /**
+     * 底部Tab布局
+     */
+    private SmartTabLayout viewPagerTab;
+    /**
+     * 四个fragment的容器
+     */
+    private ViewPager viewPager;
+    /**
+     * 标题头text
+     */
+    private TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+
+        viewPager = (ViewPager) findViewById(R.id.vpContent);
+        viewPagerTab = (SmartTabLayout) findViewById(R.id.stlTab);
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle.setText(getResources().getStringArray(R.array.tab_string_list)[0]);
+
+        initFragment();
+        setTabStyle();
+    }
+
+    /**
+     * 初始化四个tab的fragment
+     */
+    private void initFragment() {
+        adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add(null, HomePageFragment.class)
                 .add(null, SortFragment.class)
                 .add(null, MineFragment.class)
                 .add(null, MoreFragment.class)
                 .create());
-        ViewPager viewPager = (ViewPager) findViewById(R.id.vpContent);
-        viewPager.setAdapter(adapter);
 
+        viewPager.setAdapter(adapter);
+    }
+
+    /**
+     * 设置底部tab样式
+     */
+    private void setTabStyle() {
         //设置底部tab
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.stlTab);
+
         viewPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
             @Override
             public View createTabView(ViewGroup viewGroup, int i, PagerAdapter pagerAdapter) {
@@ -58,6 +93,23 @@ public class MainActivity extends FragmentActivity {
             }
         });
         viewPagerTab.setViewPager(viewPager);
+
+        viewPagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tvTitle.setText(getResources().getStringArray(R.array.tab_string_list)[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
