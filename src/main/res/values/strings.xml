@@ -10,4 +10,7 @@
         <item >我的</item>
         <item >更多</item>
     </string-array>
+
+    <string name="input_username">输入账号</string>
+    <string name="input_password">输入密码</string>
 </resources>

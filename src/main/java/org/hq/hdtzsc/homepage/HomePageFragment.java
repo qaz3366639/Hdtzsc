@@ -98,7 +98,7 @@ public class HomePageFragment extends BaseFragment {
                 carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
             }
         };
-        carouselAdHandler = new WeakReference<>(new Handler());
+        carouselAdHandler = new WeakReference<Handler>(new Handler());
         carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
     }
 }
