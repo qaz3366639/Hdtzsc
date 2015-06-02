@@ -3,6 +3,12 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
-    
 
+    <style name="edit_text_login_register">
+        <item name="met_baseColor">#0056d3</item>
+        <item name="met_primaryColor">#982360</item>
+        <item name="met_floatingLabel">highlight</item>
+        <item name="met_singleLineEllipsis">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
 </resources>

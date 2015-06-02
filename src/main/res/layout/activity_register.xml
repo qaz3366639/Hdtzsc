@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg">
+
+    <include layout="@layout/title_back" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/metUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/edit_text_login_register"
+        app:met_floatingLabelText="@string/input_username"
+        app:met_minCharacters="3"
+        app:met_maxCharacters="16"
+        android:maxLength="16"
+        android:hint="@string/input_username"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/metUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/edit_text_login_register"
+        app:met_floatingLabelText="@string/input_username"
+        app:met_minCharacters="3"
+        app:met_maxCharacters="16"
+        android:maxLength="16"
+        android:hint="@string/input_username"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/metUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/edit_text_login_register"
+        app:met_floatingLabelText="@string/input_username"
+        app:met_minCharacters="3"
+        app:met_maxCharacters="16"
+        android:maxLength="16"
+        android:hint="@string/input_username"/>
+</LinearLayout>

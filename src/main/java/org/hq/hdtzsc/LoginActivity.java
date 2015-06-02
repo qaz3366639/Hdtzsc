@@ -10,17 +10,13 @@ package org.hq.hdtzsc;/**
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.rengwuxian.materialedittext.validation.RegexpValidator;
 
 import org.hq.hdtzsc.base.BaseActivity;
 import org.hq.hdtzsc.bean.UserBean;
-import org.rc.rclibrary.utils.RegularUtil;
 
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -60,11 +56,11 @@ public class LoginActivity extends BaseActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (metUserName.getText().length() < metUserName.getMinCharacters()) {
+                if (metUserName.getText().toString().trim().length() < metUserName.getMinCharacters()) {
                     metUserName.setError(getString(R.string.error_username_too_short));
                     return;
                 }
-                if (metPassWord.getText().length() < metPassWord.getMinCharacters()) {
+                if (metPassWord.getText().toString().trim().length() < metPassWord.getMinCharacters()) {
                     metPassWord.setError(getString(R.string.error_password_too_short));
                     return;
                 }
