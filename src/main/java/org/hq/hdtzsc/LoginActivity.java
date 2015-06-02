@@ -8,16 +8,20 @@ package org.hq.hdtzsc;/**
  * Version:      [v1.0]
  */
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rengwuxian.materialedittext.validation.RegexpValidator;
 
-import org.hq.hdtzsc.utils.ProgressGenerator;
+import org.hq.hdtzsc.base.BaseActivity;
+import org.hq.hdtzsc.bean.UserBean;
+import org.rc.rclibrary.utils.RegularUtil;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Description:
@@ -28,33 +32,67 @@ import org.hq.hdtzsc.utils.ProgressGenerator;
  * UpdateRemark:
  * Version:      [v1.0]
  */
-public class LoginActivity extends Activity implements ProgressGenerator.OnCompleteListener {
+public class LoginActivity extends BaseActivity {
+
+    private MaterialEditText metUserName;
+
+    private MaterialEditText metPassWord;
+
+    private ActionProcessButton btnSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final MaterialEditText editEmail = (MaterialEditText) findViewById(R.id.metUserName);
-        final MaterialEditText editPassword = (MaterialEditText) findViewById(R.id.metPassWord);
+        setMyTitle(R.string.login);
 
-        final ProgressGenerator progressGenerator = new ProgressGenerator(this);
-        final ActionProcessButton btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
+        metUserName = (MaterialEditText) findViewById(R.id.metUserName);
+        metPassWord = (MaterialEditText) findViewById(R.id.metPassWord);
+        metUserName.setShowClearButton(true);
+        metPassWord.setShowClearButton(true);
+        btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
 
+        clickSignIn();
+    }
+
+    private void clickSignIn() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressGenerator.start(btnSignIn);
+                if (metUserName.getText().length() < metUserName.getMinCharacters()) {
+                    metUserName.setError(getString(R.string.error_username_too_short));
+                    return;
+                }
+                if (metPassWord.getText().length() < metPassWord.getMinCharacters()) {
+                    metPassWord.setError(getString(R.string.error_password_too_short));
+                    return;
+                }
+                btnSignIn.setProgress(1);
                 btnSignIn.setEnabled(false);
-                editEmail.setEnabled(false);
-                editPassword.setEnabled(false);
+                metUserName.setEnabled(false);
+                metPassWord.setEnabled(false);
+                UserBean userBean = new UserBean();
+                userBean.setUsername(metUserName.getText().toString());
+                userBean.setPassword(metPassWord.getText().toString());
+                userBean.login(LoginActivity.this, new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        btnSignIn.setProgress(100);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        btnSignIn.setProgress(-1);
+                        btnSignIn.setEnabled(true);
+                        metUserName.setEnabled(true);
+                        metPassWord.setEnabled(true);
+                        metPassWord.setError(s);
+                    }
+                });
             }
         });
-
     }
 
-    @Override
-    public void onComplete() {
-        Toast.makeText(this, "加载完成", Toast.LENGTH_LONG).show();
-    }
 }

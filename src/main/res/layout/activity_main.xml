@@ -7,19 +7,7 @@
     android:orientation="vertical"
     android:background="@color/app_bg">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_h"
-        android:background="@color/app_title_bg">
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/title_text_size"
-            android:textColor="@color/title_text"/>
-    </RelativeLayout>
+    <include layout="@layout/title" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpContent"

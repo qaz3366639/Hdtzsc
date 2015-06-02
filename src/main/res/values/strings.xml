@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Hdtzsc</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string-array name="tab_string_list" >
@@ -11,6 +10,17 @@
         <item >更多</item>
     </string-array>
 
+    <string name="error_username_too_short">用户名过短</string>
+    <string name="error_password_too_short">密码过短</string>
+
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+
+    <string name="logining">登录中</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败</string>
+
+    <string name="back">返回</string>
     <string name="input_username">输入账号</string>
     <string name="input_password">输入密码</string>
 </resources>

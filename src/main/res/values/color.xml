@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_bg">#eeeeee</color>
+    <color name="app_theme">#ea8010</color>
     <color name="app_title_bg">#ea8010</color>
     <color name="tab_bg">#ffffff</color>
 
