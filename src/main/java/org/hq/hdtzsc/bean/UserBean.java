@@ -12,11 +12,21 @@ public class UserBean extends BmobUser {
 
     private BmobFile userImage;
 
+    private Number mobilePhone;
+
     public BmobFile getUserImage() {
         return userImage;
     }
 
     public void setUserImage(BmobFile userImage) {
         this.userImage = userImage;
+    }
+
+    public Number getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(Number mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 }

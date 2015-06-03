@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             style="@style/edit_text_login_register"
             app:met_floatingLabelText="@string/input_username"
-            app:met_minCharacters="3"
+            app:met_minCharacters="5"
             app:met_maxCharacters="16"
             android:maxLength="16"
             android:hint="@string/input_username"/>
@@ -52,13 +52,9 @@
             android:text="@string/login"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            app:pb_colorComplete="@color/app_theme"
-            app:pb_colorNormal="@color/app_theme"
-            app:pb_colorPressed="@android:color/holo_red_dark"
-            app:pb_colorProgress="@color/purple_progress"
+            style="@style/app_theme_btn"
             app:pb_textComplete="@string/login_success"
             app:pb_textError="@string/login_fail"
-            app:pb_colorError="@color/red_error"
             app:pb_textProgress="@string/logining" />
 
         <TextView

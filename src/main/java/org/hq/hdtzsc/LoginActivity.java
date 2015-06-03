@@ -8,15 +8,23 @@ package org.hq.hdtzsc;/**
  * Version:      [v1.0]
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rengwuxian.materialedittext.validation.RegexpValidator;
 
 import org.hq.hdtzsc.base.BaseActivity;
 import org.hq.hdtzsc.bean.UserBean;
+import org.hq.hdtzsc.utils.IntentFactory;
+import org.rc.rclibrary.utils.RegularUtil;
+import org.w3c.dom.Text;
 
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -36,6 +44,8 @@ public class LoginActivity extends BaseActivity {
 
     private ActionProcessButton btnSignIn;
 
+    private TextView tvRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,22 +55,28 @@ public class LoginActivity extends BaseActivity {
 
         metUserName = (MaterialEditText) findViewById(R.id.metUserName);
         metPassWord = (MaterialEditText) findViewById(R.id.metPassWord);
-        metUserName.setShowClearButton(true);
-        metPassWord.setShowClearButton(true);
+        tvRegister = (TextView) findViewById(R.id.tvRegister);
         btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
 
         clickSignIn();
+        clickRegister();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        metUserName.requestFocus();
     }
 
     private void clickSignIn() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (metUserName.getText().toString().trim().length() < metUserName.getMinCharacters()) {
+                if (!metUserName.isCharactersCountValid()) {
                     metUserName.setError(getString(R.string.error_username_too_short));
                     return;
                 }
-                if (metPassWord.getText().toString().trim().length() < metPassWord.getMinCharacters()) {
+                if (!metPassWord.isCharactersCountValid()) {
                     metPassWord.setError(getString(R.string.error_password_too_short));
                     return;
                 }
@@ -87,6 +103,16 @@ public class LoginActivity extends BaseActivity {
                         metPassWord.setError(s);
                     }
                 });
+            }
+        });
+    }
+
+    private void clickRegister() {
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = IntentFactory.getRegisterActivity(LoginActivity.this);
+                startActivity(intent);
             }
         });
     }
