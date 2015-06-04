@@ -104,10 +104,6 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 tvTitle.setText(getResources().getStringArray(R.array.tab_string_list)[position]);
-                if (position == 2) {
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
             }
 
             @Override

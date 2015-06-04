@@ -13,6 +13,10 @@
 
     <dimen name="home_page_ad_indicator_rd">5dp</dimen>
     <dimen name="home_page_ad_indicator_dia">10dp</dimen>
+
+    <dimen name="more_user_image_h">60dp</dimen>
+    <dimen name="more_user_image_w">60dp</dimen>
+    <dimen name="more_user_image_rd">30dp</dimen>
     <!-- 登录输入栏padding-->
     <dimen name="login_input_pad">15dp</dimen>
 </resources>

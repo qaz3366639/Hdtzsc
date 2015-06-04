@@ -20,6 +20,7 @@ import com.rengwuxian.materialedittext.validation.RegexpValidator;
 
 import org.hq.hdtzsc.base.BaseActivity;
 import org.hq.hdtzsc.bean.UserBean;
+import org.hq.hdtzsc.utils.ActivityStateCode;
 import org.hq.hdtzsc.utils.IntentFactory;
 import org.rc.rclibrary.utils.RegularUtil;
 import org.w3c.dom.Text;
@@ -37,6 +38,7 @@ import cn.bmob.v3.listener.SaveListener;
  * Version:      [v1.0]
  */
 public class LoginActivity extends BaseActivity {
+
 
     private MaterialEditText metUserName;
 
@@ -91,6 +93,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess() {
                         btnSignIn.setProgress(100);
+                        setResult(ActivityStateCode.LOGIN_SUCCESS);
                         finish();
                     }
 
@@ -105,6 +108,12 @@ public class LoginActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        setResult(ActivityStateCode.LOGIN_CANCEL);
+        super.onDestroy();
     }
 
     private void clickRegister() {

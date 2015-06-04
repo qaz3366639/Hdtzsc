@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<in.srain.cube.views.ptr.PtrFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pflTitle"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/store_house_ptr_image"
+    <com.ecloud.pulltozoomview.PullToZoomScrollViewEx
+        android:id="@+id/ptzsvHead"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="more"/>
-</in.srain.cube.views.ptr.PtrFrameLayout>
+        custom:headerView="@layout/fragment_more_head_view"
+        custom:zoomView="@layout/fragment_more_zoom_view"
+        custom:contentView="@layout/fragment_more_content_view"/>
+</LinearLayout>
