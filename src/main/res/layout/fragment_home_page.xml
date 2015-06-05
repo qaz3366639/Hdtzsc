@@ -44,6 +44,6 @@
             android:horizontalSpacing="@dimen/home_page_sort_hor_spacing"
             android:padding="@dimen/home_page_sort_hor_spacing"
             android:background="@android:color/white"
-            android:listSelector="@null"/>
+            android:listSelector="@android:color/transparent"/>
     </LinearLayout>
 </in.srain.cube.views.ptr.PtrFrameLayout>

@@ -131,13 +131,15 @@ public class HomePageFragment extends BaseFragment {
         gvSort.setColumnWidth(width);
 
         homePageSortAdapter = new HomePageSortAdapter(getActivity(), R.layout.item_home_page_sort
-                , width);
+                , width / 2);
         gvSort.setAdapter(homePageSortAdapter);
     }
 
     private void requestGoodsSort() {
-        BmobQuery<goodsSort> bmobQuery = new BmobQuery<>();
+        BmobQuery<goodsSort> bmobQuery = new BmobQuery<goodsSort>();
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         bmobQuery.setLimit(50);
+        bmobQuery.order("-sortName");
         bmobQuery.findObjects(getActivity(), new FindListener<goodsSort>() {
             @Override
             public void onSuccess(List<goodsSort> list) {
