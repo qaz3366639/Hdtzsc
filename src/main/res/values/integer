@@ -1,0 +1,3 @@
+<resources>
+    <integer name="home_page_sort_column_count">4</integer>
+</resources>

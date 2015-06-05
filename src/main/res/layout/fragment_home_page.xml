@@ -34,5 +34,16 @@
                 app:stl_indicatorCornerRadius="@dimen/home_page_ad_indicator_rd"
                 android:layout_marginBottom="4dp"/>
         </RelativeLayout>
+
+        <org.rc.rclibrary.widget.NoScrollGridView
+            android:id="@+id/gvSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="4"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="@dimen/home_page_sort_hor_spacing"
+            android:padding="@dimen/home_page_sort_hor_spacing"
+            android:background="@android:color/white"
+            android:listSelector="@null"/>
     </LinearLayout>
 </in.srain.cube.views.ptr.PtrFrameLayout>

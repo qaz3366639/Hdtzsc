@@ -1,27 +1,30 @@
 package org.hq.hdtzsc.homepage;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.Toast;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
+import org.hq.hdtzsc.bean.goodsSort;
 import org.hq.hdtzsc.widget.SingleImageFragment;
+import org.rc.rclibrary.widget.NoScrollGridView;
 
 import java.lang.ref.WeakReference;
-import java.util.Timer;
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Description:
@@ -58,16 +61,29 @@ public class HomePageFragment extends BaseFragment {
      * 轮播广告图片间隔
      */
     private long lCarouselAdInterval = 2000L;
+
+    private NoScrollGridView gvSort;
+
+    private HomePageSortAdapter homePageSortAdapter;
+
     private WeakReference<Handler> carouselAdHandler;
     private Runnable carouselAdRunnable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        stlAdTab = (SmartTabLayout) view.findViewById(R.id.stlAdTab);
-        vpAd = (ViewPager) view.findViewById(R.id.vpAd);
+
+        View view   = inflater.inflate(R.layout.fragment_home_page, container, false);
+        stlAdTab    = (SmartTabLayout) view.findViewById(R.id.stlAdTab);
+        vpAd        = (ViewPager) view.findViewById(R.id.vpAd);
+        gvSort      = (NoScrollGridView) view.findViewById(R.id.gvSort);
+
         initAd();
+
         startCarouselAd();
+
+        measureSortWidth();
+
+        requestGoodsSort();
         return view;
     }
 
@@ -75,6 +91,7 @@ public class HomePageFragment extends BaseFragment {
      * 初始化广告栏
      */
     private void initAd() {
+
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getActivity());
         for (String url : adUrls) {
             Bundle bundle = new Bundle();
@@ -91,6 +108,7 @@ public class HomePageFragment extends BaseFragment {
      * 开始轮播广告图片
      */
     private void startCarouselAd() {
+
         carouselAdRunnable = new Runnable() {
             @Override
             public void run() {
@@ -100,5 +118,37 @@ public class HomePageFragment extends BaseFragment {
         };
         carouselAdHandler = new WeakReference<Handler>(new Handler());
         carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
+    }
+
+    private void measureSortWidth() {
+
+        int width, column, horSpace;
+        column = getResources().getInteger(R.integer.home_page_sort_column_count);
+        horSpace = getResources().getDimensionPixelOffset(R.dimen.home_page_sort_hor_spacing);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        width = (displayMetrics.widthPixels - horSpace * (column + 1)) / column;
+        gvSort.setColumnWidth(width);
+
+        homePageSortAdapter = new HomePageSortAdapter(getActivity(), R.layout.item_home_page_sort
+                , width);
+        gvSort.setAdapter(homePageSortAdapter);
+    }
+
+    private void requestGoodsSort() {
+        BmobQuery<goodsSort> bmobQuery = new BmobQuery<>();
+        bmobQuery.setLimit(50);
+        bmobQuery.findObjects(getActivity(), new FindListener<goodsSort>() {
+            @Override
+            public void onSuccess(List<goodsSort> list) {
+                homePageSortAdapter.refresh(list);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
+//                ToastFactory.loadGoodsSortError(getActivity());
+            }
+        });
     }
 }
