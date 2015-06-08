@@ -140,7 +140,7 @@ public class HomePageFragment extends BaseFragment {
                 }
             };
 
-            timer.schedule(carouselAdTask, 0, lCarouselAdInterval);
+            timer.schedule(carouselAdTask, lCarouselAdInterval, lCarouselAdInterval);
         }
     }
 
