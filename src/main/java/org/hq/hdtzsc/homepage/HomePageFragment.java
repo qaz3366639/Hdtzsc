@@ -22,6 +22,8 @@ import org.rc.rclibrary.widget.NoScrollGridView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -66,8 +68,18 @@ public class HomePageFragment extends BaseFragment {
 
     private HomePageSortAdapter homePageSortAdapter;
 
-    private WeakReference<Handler> carouselAdHandler;
+    private Handler carouselAdHandler;
+    private Timer timer;
+
+    private TimerTask carouselAdTask;
     private Runnable carouselAdRunnable;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        timer = new Timer(true);
+        carouselAdHandler = new Handler();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,15 +121,27 @@ public class HomePageFragment extends BaseFragment {
      */
     private void startCarouselAd() {
 
-        carouselAdRunnable = new Runnable() {
-            @Override
-            public void run() {
-                vpAd.setCurrentItem((vpAd.getCurrentItem() + 1) % fragmentPagerItemAdapter.getCount(), false);
-                carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
+        if (timer != null) {
+            if (carouselAdTask != null) {
+                carouselAdTask.cancel();
             }
-        };
-        carouselAdHandler = new WeakReference<Handler>(new Handler());
-        carouselAdHandler.get().postDelayed(carouselAdRunnable, lCarouselAdInterval);
+
+            carouselAdRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    vpAd.setCurrentItem((vpAd.getCurrentItem() + 1) % fragmentPagerItemAdapter.getCount(), false);
+                }
+            };
+
+            carouselAdTask = new TimerTask() {
+                @Override
+                public void run() {
+                    carouselAdHandler.post(carouselAdRunnable);
+                }
+            };
+
+            timer.schedule(carouselAdTask, 0, lCarouselAdInterval);
+        }
     }
 
     private void measureSortWidth() {
@@ -152,5 +176,13 @@ public class HomePageFragment extends BaseFragment {
 //                ToastFactory.loadGoodsSortError(getActivity());
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (carouselAdTask != null) {
+            carouselAdTask.cancel();
+        }
     }
 }
