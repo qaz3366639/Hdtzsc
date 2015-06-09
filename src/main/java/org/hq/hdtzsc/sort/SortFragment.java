@@ -11,7 +11,6 @@ import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.bean.goodsSort;
 import org.hq.hdtzsc.bean.goodsSortChild;
-import org.hq.hdtzsc.utils.ToastFactory;
 import org.rc.rclibrary.widget.NoScrollGridView;
 
 import java.util.List;
@@ -34,6 +33,8 @@ public class SortFragment extends BaseFragment {
 
     private ChildSortAdapter childSortAdapter;
 
+    public int currentSortIndex = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view        = inflater.inflate(R.layout.fragment_sort, container, false);
@@ -43,11 +44,14 @@ public class SortFragment extends BaseFragment {
         childSortAdapter = new ChildSortAdapter(getActivity(), R.layout.item_sort_list_child);
 
         lvSort.setAdapter(sortAdapter);
+        sortAdapter.setLvSort(lvSort);
         gvChildSort.setAdapter(childSortAdapter);
 
         requestGoodsSort();
 
         showChildSort();
+
+        selectSort(currentSortIndex, true);
         return view;
     }
 
@@ -72,7 +76,7 @@ public class SortFragment extends BaseFragment {
 
             @Override
             public void onError(int i, String s) {
-                ToastFactory.loadGoodsSortError(getActivity());
+//                ToastFactory.loadGoodsSortError(getActivity());
             }
         });
     }
@@ -88,26 +92,40 @@ public class SortFragment extends BaseFragment {
         lvSort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentSortIndex = position;
+                selectSort(position, false);
+            }
+        });
+    }
 
-                childSortAdapter.refresh(null);
+    public void selectSort(int position, boolean isSetItemState) {
 
-                BmobQuery<goodsSortChild> bmobQuery = new BmobQuery<>();
-                bmobQuery.addWhereEqualTo("parentSort", sortAdapter.getData().get(position)
-                        .getObjectId());
-                bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
-                bmobQuery.setMaxCacheAge(5 * 60 * 1000);
-                bmobQuery.setLimit(50);
-                bmobQuery.findObjects(getActivity(), new FindListener<goodsSortChild>() {
-                    @Override
-                    public void onSuccess(List<goodsSortChild> list) {
-                        childSortAdapter.refresh(list);
-                    }
+        if (sortAdapter.getData().size() <= 0) {
+            return;
+        }
 
-                    @Override
-                    public void onError(int i, String s) {
-                        ToastFactory.loadGoodsSortError(getActivity());
-                    }
-                });
+        if (isSetItemState) {
+            lvSort.setItemChecked(position, true);
+        }
+
+        sortAdapter.notifyDataSetChanged();
+        childSortAdapter.refresh(null);
+
+        BmobQuery<goodsSortChild> bmobQuery = new BmobQuery<>();
+        bmobQuery.addWhereEqualTo("parentSort", sortAdapter.getData().get(position)
+                .getObjectId());
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        bmobQuery.setMaxCacheAge(5 * 60 * 1000);
+        bmobQuery.setLimit(50);
+        bmobQuery.findObjects(getActivity(), new FindListener<goodsSortChild>() {
+            @Override
+            public void onSuccess(List<goodsSortChild> list) {
+                childSortAdapter.refresh(list);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+//                        ToastFactory.loadGoodsSortError(getActivity());
             }
         });
     }

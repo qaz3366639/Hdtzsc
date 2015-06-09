@@ -14,6 +14,7 @@
         android:scrollbars="none"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
+        android:listSelector="@android:color/transparent"
         android:choiceMode="singleChoice"/>
 
     <ScrollView

@@ -2,22 +2,22 @@ package org.hq.hdtzsc.homepage;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.util.TimeUtils;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.AdapterView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import org.hq.hdtzsc.MainActivity;
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.bean.goodsSort;
-import org.hq.hdtzsc.utils.ToastFactory;
+import org.hq.hdtzsc.sort.SortFragment;
 import org.hq.hdtzsc.widget.SingleImageFragment;
 import org.rc.rclibrary.widget.NoScrollGridView;
 
@@ -27,7 +27,6 @@ import java.util.TimerTask;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Description:
@@ -97,6 +96,8 @@ public class HomePageFragment extends BaseFragment {
         measureSortWidth();
 
         requestGoodsSort();
+
+        jumpToSort();
         return view;
     }
 
@@ -174,7 +175,20 @@ public class HomePageFragment extends BaseFragment {
 
             @Override
             public void onError(int i, String s) {
-                ToastFactory.loadGoodsSortError(getActivity());
+//                ToastFactory.loadGoodsSortError(getActivity());
+            }
+        });
+    }
+
+    private void jumpToSort() {
+        gvSort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ((SortFragment)((MainActivity) getActivity()).getAdapter().getItem(MainActivity
+                        .SORT_INDEX)).currentSortIndex = position;
+                ((MainActivity) getActivity()).getViewPager()
+                        .setCurrentItem(MainActivity.SORT_INDEX, false);
             }
         });
     }

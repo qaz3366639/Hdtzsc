@@ -12,12 +12,11 @@
         android:textSize="16sp"
         android:textColor="@drawable/selector_sort_name_text"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:duplicateParentState="true"/>
+        android:layout_marginBottom="10dp"/>
 
     <View
+        android:id="@+id/vDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@drawable/selector_sort_name_divider"
-        android:duplicateParentState="true"/>
+        android:background="@drawable/selector_sort_name_divider"/>
 </LinearLayout>

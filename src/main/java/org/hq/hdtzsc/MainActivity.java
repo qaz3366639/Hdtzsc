@@ -25,6 +25,15 @@ import org.hq.hdtzsc.sort.SortFragment;
 public class MainActivity extends FragmentActivity {
 
     private int[] layout = new int[]{R.layout.item_tab_homepage, R.layout.item_tab_sort, R.layout.item_tab_mine, R.layout.item_tab_more};
+
+    public static final int HOME_PAGE_INDEX = 0;
+
+    public static final int SORT_INDEX      = 1;
+
+    public static final int MINE_INDEX      = 2;
+
+    public static final int MORE_INDEX      = 3;
+
     /**
      * 底部四个fragment数据适配器
      */
@@ -111,6 +120,14 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+    }
+
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+    public FragmentPagerItemAdapter getAdapter() {
+        return adapter;
     }
 
     @Override
