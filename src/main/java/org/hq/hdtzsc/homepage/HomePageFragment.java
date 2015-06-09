@@ -2,12 +2,12 @@ package org.hq.hdtzsc.homepage;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.util.TimeUtils;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -17,16 +17,17 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.bean.goodsSort;
+import org.hq.hdtzsc.utils.ToastFactory;
 import org.hq.hdtzsc.widget.SingleImageFragment;
 import org.rc.rclibrary.widget.NoScrollGridView;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Description:
@@ -160,8 +161,9 @@ public class HomePageFragment extends BaseFragment {
     }
 
     private void requestGoodsSort() {
-        BmobQuery<goodsSort> bmobQuery = new BmobQuery<goodsSort>();
+        BmobQuery<goodsSort> bmobQuery = new BmobQuery<>();
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        bmobQuery.setMaxCacheAge(5 * 60 * 1000);
         bmobQuery.setLimit(50);
         bmobQuery.order("-sortName");
         bmobQuery.findObjects(getActivity(), new FindListener<goodsSort>() {
@@ -172,8 +174,7 @@ public class HomePageFragment extends BaseFragment {
 
             @Override
             public void onError(int i, String s) {
-                Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
-//                ToastFactory.loadGoodsSortError(getActivity());
+                ToastFactory.loadGoodsSortError(getActivity());
             }
         });
     }

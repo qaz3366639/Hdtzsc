@@ -7,37 +7,46 @@
 
     <ListView
         android:id="@+id/lvSort"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:scrollbars="none"/>
+        android:divider="@null"
+        android:scrollbars="none"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:choiceMode="singleChoice"/>
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="3"
+        android:background="@color/app_shadow_bg"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/app_light_bg">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/splash01"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:background="@color/app_light_bg"/>
 
             <org.rc.rclibrary.widget.NoScrollGridView
                 android:id="@+id/gvChildSort"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:listSelector="@android:color/transparent"
-                android:horizontalSpacing="15dp"
-                android:verticalSpacing="10dp"/>
+                android:horizontalSpacing="@dimen/child_sort_hor_spacing"
+                android:verticalSpacing="@dimen/child_sort_ver_spacing"
+                android:padding="10dp"
+                android:numColumns="3"
+                android:background="@color/app_light_bg"/>
         </LinearLayout>
     </ScrollView>
 
