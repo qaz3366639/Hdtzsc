@@ -10,6 +10,11 @@
         <item >更多</item>
     </string-array>
 
+    <string name="goods_list">商品列表</string>
+
+    <string name="goods_price_htl">价格高到底</string>
+    <string name="goods_price_lth">价格低到高</string>
+
     <!-- 错误提示-->
     <string name="error_username_too_short">用户名过短</string>
     <string name="error_password_too_short">密码过短</string>
@@ -23,6 +28,9 @@
     <string name="registering">注册中</string>
     <string name="register_success">注册成功</string>
     <string name="register_fail">注册失败</string>
+
+    <string name="empty_tips">没有找到结果哦~</string>
+    <string name="request_fail">请求失败!</string>
 
     <string name="login">登录</string>
     <string name="register">注册</string>
