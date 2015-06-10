@@ -48,5 +48,5 @@
 
     </LinearLayout>
 
-
+    <include layout="@layout/layout_goods_list" />
 </LinearLayout>

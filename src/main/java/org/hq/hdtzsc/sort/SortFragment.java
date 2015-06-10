@@ -1,5 +1,6 @@
 package org.hq.hdtzsc.sort;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.bean.goodsSort;
 import org.hq.hdtzsc.bean.goodsSortChild;
+import org.hq.hdtzsc.utils.IntentFactory;
 import org.rc.rclibrary.widget.NoScrollGridView;
 
 import java.util.List;
@@ -50,6 +52,8 @@ public class SortFragment extends BaseFragment {
         requestGoodsSort();
 
         showChildSort();
+
+        openGoodsList();
 
         selectSort(currentSortIndex, true);
         return view;
@@ -126,6 +130,20 @@ public class SortFragment extends BaseFragment {
             @Override
             public void onError(int i, String s) {
 //                        ToastFactory.loadGoodsSortError(getActivity());
+            }
+        });
+    }
+
+    /**
+     * 打开商品列表
+     */
+    private void openGoodsList() {
+        gvChildSort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = IntentFactory.getGoodsListActivity(getActivity());
+                intent.putExtra("goodsId", childSortAdapter.getData().get(position).getObjectId());
+                startActivity(intent);
             }
         });
     }

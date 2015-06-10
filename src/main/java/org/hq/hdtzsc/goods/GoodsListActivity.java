@@ -1,10 +1,15 @@
 package org.hq.hdtzsc.goods;
 
 import android.os.Bundle;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseActivity;
+import org.hq.hdtzsc.widget.LayoutGoodsList;
+
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Description:
@@ -13,7 +18,7 @@ import org.hq.hdtzsc.base.BaseActivity;
  */
 public class GoodsListActivity extends BaseActivity {
 
-    private ListView lvSort;
+    private LayoutGoodsList layoutGoodsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,12 @@ public class GoodsListActivity extends BaseActivity {
         setContentView(R.layout.activity_goods_list);
         setMyTitle(R.string.goods_list);
 
-        lvSort = (ListView) findViewById(R.id.lvSort);
+        FrameLayout llGoodsList = (FrameLayout) findViewById(R.id.llGoodsList);
 
+        String goodsId = getIntent().getStringExtra("goodsId");
+
+        layoutGoodsList = new LayoutGoodsList(llGoodsList, this, goodsId);
+
+        layoutGoodsList.start();
     }
 }

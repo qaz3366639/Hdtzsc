@@ -25,5 +25,10 @@
     <!-- 登录输入栏padding-->
     <dimen name="login_input_pad">15dp</dimen>
 
+    <!-- 商品字体大小-->
+    <dimen name="goods_name_text">15sp</dimen>
+
+    <dimen name="goods_price_text">14sp</dimen>
+
     <!-- 分类页面分类名称margin-->
 </resources>
