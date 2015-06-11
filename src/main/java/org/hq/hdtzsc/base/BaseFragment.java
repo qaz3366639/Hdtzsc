@@ -25,7 +25,7 @@ import in.srain.cube.views.ptr.header.RentalsSunHeaderView;
  * UpdateRemark: 
  * Version:      [v1.0] 
  */
-public class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment{
 
     protected PtrFrameLayout mPtrFrameLayout;
 
@@ -51,4 +51,6 @@ public class BaseFragment extends Fragment{
         mPtrFrameLayout.addPtrUIHandler(rentalsSunHeaderView);
         mPtrFrameLayout.setKeepHeaderWhenRefresh(false);
     }
+
+    public abstract void update();
 }

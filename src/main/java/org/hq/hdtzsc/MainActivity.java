@@ -16,6 +16,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.homepage.HomePageFragment;
 import org.hq.hdtzsc.mine.MineFragment;
 import org.hq.hdtzsc.more.MoreFragment;
@@ -63,6 +64,8 @@ public class MainActivity extends FragmentActivity {
 
         initFragment();
         setTabStyle();
+
+        viewPager.setCurrentItem(HOME_PAGE_INDEX);
     }
 
     /**
@@ -113,6 +116,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 tvTitle.setText(getResources().getStringArray(R.array.tab_string_list)[position]);
+                ((BaseFragment) adapter.getPage(position)).update();
             }
 
             @Override

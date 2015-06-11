@@ -13,6 +13,7 @@ import org.hq.hdtzsc.base.BaseFragment;
 import org.hq.hdtzsc.bean.goodsSort;
 import org.hq.hdtzsc.bean.goodsSortChild;
 import org.hq.hdtzsc.utils.IntentFactory;
+import org.hq.hdtzsc.utils.ToastFactory;
 import org.rc.rclibrary.widget.NoScrollGridView;
 
 import java.util.List;
@@ -49,13 +50,10 @@ public class SortFragment extends BaseFragment {
         sortAdapter.setLvSort(lvSort);
         gvChildSort.setAdapter(childSortAdapter);
 
-        requestGoodsSort();
-
         showChildSort();
 
         openGoodsList();
 
-        selectSort(currentSortIndex, true);
         return view;
     }
 
@@ -63,6 +61,11 @@ public class SortFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         measureChildSortWidth();
+    }
+
+    @Override
+    public void update() {
+        requestGoodsSort();
     }
 
     private void requestGoodsSort() {
@@ -76,6 +79,7 @@ public class SortFragment extends BaseFragment {
             @Override
             public void onSuccess(List<goodsSort> list) {
                 sortAdapter.refresh(list);
+                selectSort(currentSortIndex, true);
             }
 
             @Override

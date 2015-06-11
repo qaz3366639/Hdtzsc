@@ -1,7 +1,9 @@
 package org.hq.hdtzsc.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.bean.Goods;
 import org.hq.hdtzsc.goods.GoodsListAdapter;
+import org.hq.hdtzsc.utils.IntentFactory;
 
 import java.util.List;
 
@@ -81,18 +84,20 @@ public class LayoutGoodsList {
         pflGoodsList = (PtrFrameLayout) llGoodsList.findViewById(R.id.pflGoodsList);
         lvGoodsList  = (ListView) llGoodsList.findViewById(R.id.lvGoodsList);
         lvGoodsList.setAdapter(goodsListAdapter);
+//        lvGoodsList.setFooterDividersEnabled(false);
 
+        //设置下拉刷新的head
         MaterialHeader header = new MaterialHeader(context);
-
 //        header.setColorSchemeColors(colors);
         header.setPadding(0, 30, 0, 30);
         header.setPtrFrameLayout(pflGoodsList);
-
         pflGoodsList.setHeaderView(header);
         pflGoodsList.addPtrUIHandler(header);
 
+        //设置上拉加载更多的footer
         loadMoreListViewContainer = (LoadMoreListViewContainer) llGoodsList.findViewById(R.id.load_more_list_view_container);
         loadMoreListViewContainer.useDefaultHeader();
+        lvGoodsList.setFooterDividersEnabled(false);
 
         loadMoreListViewContainer.setLoadMoreHandler(new LoadMoreHandler() {
             @Override
@@ -109,22 +114,34 @@ public class LayoutGoodsList {
 
             @Override
             public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
-                requestGoodsList();
+                requestGoodsList(false, null);
+            }
+        });
+
+        lvGoodsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = IntentFactory.getUploadGoodsActivity(context);
+                context.startActivity(intent);
             }
         });
     }
 
-    public void start() {
-        showViewState(ViewState.LOADING);
-    }
+    /**
+     * 请求商品列表
+     * @param isLoad true：加载更多商品 false：刷新商品列表
+     * @param order 商品列表排序条件
+     */
+    public void requestGoodsList(final boolean isLoad, String order) {
 
-    private void requestGoodsList() {
+        showViewState(ViewState.LOADING);
 
         BmobQuery<Goods> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("goodsSort", goodsId);
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         bmobQuery.setMaxCacheAge(5 * 60 * 1000);
         bmobQuery.setLimit(PAGE_ITEM_COUNT);
+        bmobQuery.order(order);
 
         bmobQuery.findObjects(context, new FindListener<Goods>() {
             @Override
@@ -140,8 +157,12 @@ public class LayoutGoodsList {
                         loadMoreListViewContainer.loadMoreFinish(false, true);
                     }
                 }
-                pflGoodsList.refreshComplete();
-                goodsListAdapter.refresh(list);
+                if (!isLoad) {
+                    pflGoodsList.refreshComplete();
+                    goodsListAdapter.refresh(list);
+                } else {
+                    goodsListAdapter.load(list);
+                }
             }
 
             @Override
@@ -169,12 +190,12 @@ public class LayoutGoodsList {
                     showViewState(ViewState.SUCCESS);
 
                     if (list.size() < PAGE_ITEM_COUNT) {
-                        loadMoreListViewContainer.loadMoreFinish(false, true);
-                    } else {
                         loadMoreListViewContainer.loadMoreFinish(false, false);
+                    } else {
+                        loadMoreListViewContainer.loadMoreFinish(false, true);
                     }
                 }
-                goodsListAdapter.load(list);
+
             }
 
             @Override
@@ -189,7 +210,9 @@ public class LayoutGoodsList {
 
         switch (viewState) {
             case LOADING:
-                pflGoodsList.autoRefresh();
+                lvGoodsList.setVisibility(View.GONE);
+                rlEmpty.setVisibility(View.GONE);
+                rlFail.setVisibility(View.GONE);
                 break;
             case SUCCESS:
                 lvGoodsList.setVisibility(View.VISIBLE);

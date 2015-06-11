@@ -36,6 +36,9 @@
         <activity android:name=".goods.GoodsListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity android:name=".goods.UploadGoodsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

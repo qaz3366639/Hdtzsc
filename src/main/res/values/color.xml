@@ -20,4 +20,5 @@
     <!-- 分类名称分割线颜色-->
     <color name="divider_sort_name_unselected">#e2e2e2</color>
 
+    <color name="item_goods_list_pressed">#f3f2f2</color>
 </resources>

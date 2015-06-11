@@ -35,7 +35,7 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.3'
     //Optional: see how to use the utility.
     //    compile 'com.ogaclejapan.smarttablayout:utils-v13:1.1.3@aar'
-    compile project(':rclibrary')
+    compile project(':RCLibrary')
     compile project(':library')
     compile files('libs/universal-image-loader-1.9.3-with-sources.jar')
     compile files('libs/BmobSDK_V3.3.8_0521.jar')

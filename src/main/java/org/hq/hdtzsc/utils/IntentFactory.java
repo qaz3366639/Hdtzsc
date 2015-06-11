@@ -6,6 +6,7 @@ import android.content.Intent;
 import org.hq.hdtzsc.LoginActivity;
 import org.hq.hdtzsc.RegisterActivity;
 import org.hq.hdtzsc.goods.GoodsListActivity;
+import org.hq.hdtzsc.goods.UploadGoodsActivity;
 
 /**
  * Description:
@@ -24,5 +25,9 @@ public class IntentFactory {
 
     public static Intent getGoodsListActivity(Context context) {
         return new Intent(context, GoodsListActivity.class);
+    }
+
+    public static Intent getUploadGoodsActivity(Context context) {
+        return new Intent(context, UploadGoodsActivity.class);
     }
 }

@@ -101,6 +101,11 @@ public class HomePageFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void update() {
+
+    }
+
     /**
      * 初始化广告栏
      */
@@ -185,10 +190,10 @@ public class HomePageFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ((SortFragment)((MainActivity) getActivity()).getAdapter().getItem(MainActivity
+                ((SortFragment)((MainActivity) getActivity()).getAdapter().getPage(MainActivity
                         .SORT_INDEX)).currentSortIndex = position;
                 ((MainActivity) getActivity()).getViewPager()
-                        .setCurrentItem(MainActivity.SORT_INDEX, false);
+                        .setCurrentItem(MainActivity.SORT_INDEX, true);
             }
         });
     }

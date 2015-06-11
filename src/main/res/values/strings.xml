@@ -45,6 +45,16 @@
     <string name="input_mobile_phone_number">输入手机号码</string>
     <string name="input_email">输入邮箱地址</string>
 
+    <!-- 上传商品-->
+    <string name="upload_goods">上传商品</string>
+    <string name="goods_basic_info">商品基本信息</string>
+    <string name="input_goods_name">输入商品名称</string>
+    <string name="input_goods_price">输入商品价格</string>
+    <string name="choose_goods_sort">选择商品分类</string>
+
+    <!-- 单位-->
+    <string name="unit_yuan">元</string>
+
     <string name="back">返回</string>
     <string name="input_username">输入账号</string>
     <string name="input_password">输入密码</string>

@@ -1,7 +1,9 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+
+    <dimen name="activity_vertical_padding">10dp</dimen>
 
     <dimen name="title_h">48dp</dimen>
 
@@ -27,8 +29,10 @@
 
     <!-- 商品字体大小-->
     <dimen name="goods_name_text">15sp</dimen>
-
     <dimen name="goods_price_text">14sp</dimen>
+
+    <!-- 上传商品界面标题字体大小-->
+    <dimen name="upload_goods_text_title">18sp</dimen>
 
     <!-- 分类页面分类名称margin-->
 </resources>

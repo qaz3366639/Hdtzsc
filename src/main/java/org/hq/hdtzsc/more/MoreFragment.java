@@ -80,6 +80,11 @@ public class MoreFragment extends BaseFragment {
     }
 
     @Override
+    public void update() {
+
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ActivityStateCode.LOGIN_SUCCESS) {
