@@ -27,6 +27,16 @@ public class goodsSort extends BmobObject {
 
     private BmobFile sortImage;
 
+    private boolean hasChild;
+
+    public boolean getHasChild() {
+        return hasChild;
+    }
+
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
+    }
+
     public String getSortName() {
         return sortName;
     }

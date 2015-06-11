@@ -11,6 +11,7 @@
     <com.gc.materialdesign.views.ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:padding="@dimen/activity_vertical_padding">
 
         <LinearLayout
@@ -41,8 +42,8 @@
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/metGoodsPrice"
                     style="@style/edit_text_upload_goods"
-                    android:minLines="1"
-                    android:maxLength="10"
+                    app:met_minCharacters="1"
+                    app:met_maxCharacters="10"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="numberDecimal"
@@ -56,13 +57,66 @@
                     android:text="@string/unit_yuan"/>
             </LinearLayout>
 
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="@dimen/upload_goods_text_title"-->
+                <!--android:text="@string/choose_goods_sort"/>-->
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/metGetGoodsSort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_minCharacters="1"
+                android:inputType="none"
+                app:met_floatingLabelText="@string/choose_goods_sort"
+                android:hint="@string/choose_goods_sort"/>
+
+            <org.rc.rclibrary.widget.NoScrollGridView
+                android:id="@+id/gvGoodsSort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:verticalSpacing="@dimen/child_sort_ver_spacing"
+                android:horizontalSpacing="@dimen/child_sort_hor_spacing"
+                android:numColumns="4"
+                android:background="@color/app_light_bg"
+                android:listSelector="@android:color/transparent"/>
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btnConfirmUpload"
+                android:layout_width="@dimen/upload_goods_btn_w"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/btn_normal"
+                android:textSize="6sp"
+                android:text="@string/confirm_upload" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/upload_goods_text_title"
-                android:text="@string/choose_goods_sort"/>
+                android:text="@string/upload_goods_image"/>
 
+            <com.dd.CircularProgressButton
+                android:id="@+id/btnGoodsImage1"
+                style="@style/btn_upload_goods_image"/>
+
+            <com.dd.CircularProgressButton
+                android:id="@+id/btnGoodsImage2"
+                style="@style/btn_upload_goods_image"/>
+
+            <com.dd.CircularProgressButton
+                android:id="@+id/btnGoodsImage3"
+                style="@style/btn_upload_goods_image"/>
+
+            <com.dd.CircularProgressButton
+                android:id="@+id/btnGoodsImage4"
+                android:layout_marginBottom="20dp"
+                style="@style/btn_upload_goods_image"/>
         </LinearLayout>
     </com.gc.materialdesign.views.ScrollView>
 

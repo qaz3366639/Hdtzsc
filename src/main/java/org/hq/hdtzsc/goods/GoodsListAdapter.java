@@ -31,7 +31,9 @@ public class GoodsListAdapter extends RCBaseAdapter<Goods> {
 
         tvGoodsName.setText(data.get(position).getGoodsName());
         tvGoodsPrice.setText("￥" + data.get(position).getGoodsPrice());
-        ImageLoader.getInstance().displayImage(data.get(position).getGoodsImage1().getFileUrl(context),
-                ivGoodsImage);
+        if (data.get(position).getGoodsImage1() != null) {
+            ImageLoader.getInstance().displayImage(data.get(position).getGoodsImage1(),
+                    ivGoodsImage);
+        }
     }
 }

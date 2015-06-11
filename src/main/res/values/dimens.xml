@@ -33,6 +33,8 @@
 
     <!-- 上传商品界面标题字体大小-->
     <dimen name="upload_goods_text_title">18sp</dimen>
+    <!-- 上传商品界面按钮宽度-->
+    <dimen name="upload_goods_btn_w">200dp</dimen>
 
     <!-- 分类页面分类名称margin-->
 </resources>

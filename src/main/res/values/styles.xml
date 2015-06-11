@@ -26,6 +26,21 @@
         <item name="android:focusableInTouchMode">true</item>
     </style>
 
+    <style name="btn_upload_goods_image">
+        <item name="android:layout_width">@dimen/upload_goods_btn_w</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/upload_goods_text_title</item>
+        <item name="cpb_selectorIdle">@drawable/selector_upload_image_btn</item>
+        <item name="cpb_textComplete">@string/upload_success</item>
+        <item name="cpb_textError">@string/upload_fail</item>
+        <item name="cpb_textIdle">@string/click_upload</item>
+        <item name="cpb_cornerRadius">48dp</item>
+    </style>
+
     <style name="app_theme_btn">
         <item name="pb_colorComplete">@color/btn_complete</item>
         <item name="pb_colorNormal">@color/btn_normal</item>
