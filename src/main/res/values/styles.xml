@@ -14,6 +14,20 @@
         <item name="android:focusableInTouchMode">true</item>
     </style>
 
+    <style name="text_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:drawableRight">@mipmap/ic_jiantou_right</item>
+        <item name="android:background">@drawable/selector_text_item</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
     <style name="edit_text_upload_goods">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

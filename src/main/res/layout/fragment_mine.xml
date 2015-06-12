@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<in.srain.cube.views.ptr.PtrFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pflTitle"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg">
 
-    <TextView
-        android:id="@+id/store_house_ptr_image"
+    <LinearLayout
+        android:id="@+id/llNotLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_login" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/selector_btn"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="@string/login"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llIsLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="mine"/>
-</in.srain.cube.views.ptr.PtrFrameLayout>
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvMyGoods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_my_goods_selected"
+            android:drawableRight="@mipmap/ic_jiantou_right"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/selector_text_item"
+            android:textColor="@android:color/black"
+            android:text="@string/my_goods"/>
+
+        <include layout="@layout/layout_goods_list" />
+    </LinearLayout>
+</LinearLayout>

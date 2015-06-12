@@ -41,4 +41,12 @@ public class ToastFactory {
     public static void uploadGoodsImageFail(Context context) {
         Toast.makeText(context, "上传商品图片失败", Toast.LENGTH_SHORT).show();
     }
+
+    public static void currentVersionIsNew(Context context) {
+        Toast.makeText(context, "当前已是最新版本", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void checkYourNetWord(Context context) {
+        Toast.makeText(context, "请先检测您的网络", Toast.LENGTH_SHORT).show();
+    }
 }

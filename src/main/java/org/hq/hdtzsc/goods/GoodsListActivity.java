@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.hq.hdtzsc.R;
@@ -37,13 +38,13 @@ public class GoodsListActivity extends BaseActivity {
         setMyTitle(R.string.goods_list);
 
         llGoodsFilter           = (LinearLayout) findViewById(R.id.llGoodsFilter);
-        FrameLayout llGoodsList = (FrameLayout) findViewById(R.id.llGoodsList);
+        FrameLayout flGoodsList = (FrameLayout) findViewById(R.id.flGoodsList);
 
         String goodsId          = getIntent().getStringExtra("goodsId");
 
-        layoutGoodsList         = new LayoutGoodsList(llGoodsList, this, goodsId);
+        layoutGoodsList         = new LayoutGoodsList(flGoodsList, this, goodsId);
 
-        layoutGoodsList.requestGoodsList(false, null);
+        layoutGoodsList.start();
 
         initFilter();
     }

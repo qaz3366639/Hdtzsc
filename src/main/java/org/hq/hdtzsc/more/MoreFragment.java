@@ -21,7 +21,10 @@ import org.hq.hdtzsc.bean.UserBean;
 import org.hq.hdtzsc.utils.ActivityStateCode;
 import org.hq.hdtzsc.utils.IntentFactory;
 import org.hq.hdtzsc.utils.LoginUtil;
+import org.hq.hdtzsc.utils.ToastFactory;
+import org.rc.rclibrary.utils.NetWorkState;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -43,13 +46,16 @@ public class MoreFragment extends BaseFragment {
 
     private TextView tvUserName;
 
+    private TextView tvClearCache;
+
+    private TextView tvCheckUpdate;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         initView(view);
 
-        isShowLogin();
         return view;
     }
 
@@ -61,6 +67,8 @@ public class MoreFragment extends BaseFragment {
         tvLogin         = (TextView) view.findViewById(R.id.tvLogin);
         ivUserImage     = (ImageView) view.findViewById(R.id.ivUserImage);
         tvUserName      = (TextView) view.findViewById(R.id.tvUserName);
+        tvClearCache    = (TextView) view.findViewById(R.id.tvClearCache);
+        tvCheckUpdate   = (TextView) view.findViewById(R.id.tvCheckUpdate);
 
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,11 +85,28 @@ public class MoreFragment extends BaseFragment {
             }
         });
 
+        tvClearCache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BmobQuery.clearAllCachedResults(getActivity());
+            }
+        });
+
+        tvCheckUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NetWorkState.isNetworkConnected(getActivity())) {
+                    ToastFactory.currentVersionIsNew(getActivity());
+                } else {
+                    ToastFactory.checkYourNetWord(getActivity());
+                }
+            }
+        });
     }
 
     @Override
     public void update() {
-
+        isShowLogin();
     }
 
     @Override

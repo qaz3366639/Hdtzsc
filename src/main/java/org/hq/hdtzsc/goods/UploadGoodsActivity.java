@@ -236,7 +236,7 @@ public class UploadGoodsActivity extends BaseActivity implements CropHandler{
         cropParams.outputX = 480;
         cropParams.outputY = 800;
 
-        uploadDialog.setTitleText(null).setContentText("选择获取图片方式")
+        uploadDialog.setTitleText("").setContentText("选择获取图片方式")
                 .setConfirmText("打开相册").setCancelText("打开相机").setCancelable(true);
     }
 

@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.bean.Goods;
@@ -22,6 +20,7 @@ import cn.bmob.v3.listener.FindListener;
 import in.srain.cube.views.loadmore.LoadMoreContainer;
 import in.srain.cube.views.loadmore.LoadMoreHandler;
 import in.srain.cube.views.loadmore.LoadMoreListViewContainer;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.MaterialHeader;
@@ -33,9 +32,9 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  */
 public class LayoutGoodsList {
 
-    private Context context;
+    private Context mContext;
 
-    private FrameLayout llGoodsList;
+    private FrameLayout flGoodsList;
 
     private PtrFrameLayout pflGoodsList;
 
@@ -48,56 +47,91 @@ public class LayoutGoodsList {
     private ListView lvGoodsList;
 
     private GoodsListAdapter goodsListAdapter;
-
-    private String goodsId;
+    /**
+     * 分类ID
+     */
+    private String sortId;
+    /**
+     * 条件ID
+     */
+    private String conditionId;
+    /**
+     * 条件值
+     */
+    private String condition;
 
     private ViewState viewState = ViewState.LOADING;
 
     private final int PAGE_ITEM_COUNT = 20;
 
-    public LayoutGoodsList(FrameLayout llGoodsList, Context context, String goodsId) {
+    public LayoutGoodsList(FrameLayout flGoodsList, Context context, String sortId) {
 
-        if (llGoodsList == null) {
-            throw new IllegalArgumentException("llGoodsList must not be null");
+        if (flGoodsList == null) {
+            throw new IllegalArgumentException("flGoodsList must not be null");
         }
 
         if (context == null) {
             throw new IllegalArgumentException("context must not be null");
         }
 
-        if (goodsId == null) {
-            throw new IllegalArgumentException("goodsId must not be null");
+        if (sortId == null) {
+            throw new IllegalArgumentException("sortId must not be null");
         }
 
-        this.llGoodsList     = llGoodsList;
-        this.context          = context;
-        this.goodsId          = goodsId;
-        this.goodsListAdapter = new GoodsListAdapter(context, R.layout.item_goods_list);
+        this.sortId          = sortId;
 
-        initView();
+        initView(flGoodsList, context);
     }
 
-    private void initView() {
+    public LayoutGoodsList(FrameLayout flGoodsList, Context context, String conditionId, String condition) {
 
-        rlEmpty      = (RelativeLayout) llGoodsList.findViewById(R.id.rlEmpty);
-        rlFail       = (RelativeLayout) llGoodsList.findViewById(R.id.rlFail);
-        pflGoodsList = (PtrFrameLayout) llGoodsList.findViewById(R.id.pflGoodsList);
-        lvGoodsList  = (ListView) llGoodsList.findViewById(R.id.lvGoodsList);
+        if (flGoodsList == null) {
+            throw new IllegalArgumentException("flGoodsList must not be null");
+        }
+
+        if (context == null) {
+            throw new IllegalArgumentException("context must not be null");
+        }
+
+        if (conditionId == null) {
+            throw new IllegalArgumentException("conditionId must not be null");
+        }
+
+        if (condition == null) {
+            throw new IllegalArgumentException("condition must not be null");
+        }
+
+        this.conditionId = conditionId;
+        this.condition   = condition;
+
+        initView(flGoodsList, context);
+    }
+
+    private void initView(FrameLayout flGoodsList, Context context) {
+
+        this.flGoodsList     = flGoodsList;
+        this.mContext          = context;
+        this.goodsListAdapter = new GoodsListAdapter(context, R.layout.item_goods_list);
+
+        rlEmpty      = (RelativeLayout) flGoodsList.findViewById(R.id.rlEmpty);
+        rlFail       = (RelativeLayout) flGoodsList.findViewById(R.id.rlFail);
+        pflGoodsList = (PtrFrameLayout) flGoodsList.findViewById(R.id.pflGoodsList);
+        lvGoodsList  = (ListView) flGoodsList.findViewById(R.id.lvGoodsList);
         lvGoodsList.setAdapter(goodsListAdapter);
-//        lvGoodsList.setFooterDividersEnabled(false);
 
         //设置下拉刷新的head
-        MaterialHeader header = new MaterialHeader(context);
-//        header.setColorSchemeColors(colors);
+        final MaterialHeader header = new MaterialHeader(context);
+        int[] colors = mContext.getResources().getIntArray(R.array.google_colors);
+        header.setColorSchemeColors(colors);
         header.setPadding(0, 30, 0, 30);
         header.setPtrFrameLayout(pflGoodsList);
         pflGoodsList.setHeaderView(header);
         pflGoodsList.addPtrUIHandler(header);
 
         //设置上拉加载更多的footer
-        loadMoreListViewContainer = (LoadMoreListViewContainer) llGoodsList.findViewById(R.id.load_more_list_view_container);
+        loadMoreListViewContainer = (LoadMoreListViewContainer) flGoodsList
+                .findViewById(R.id.load_more_list_view_container);
         loadMoreListViewContainer.useDefaultHeader();
-        lvGoodsList.setFooterDividersEnabled(false);
 
         loadMoreListViewContainer.setLoadMoreHandler(new LoadMoreHandler() {
             @Override
@@ -109,7 +143,7 @@ public class LayoutGoodsList {
         pflGoodsList.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout ptrFrameLayout, View view, View view1) {
-                return viewState != ViewState.LOADING;
+                return PtrDefaultHandler.checkContentCanBePulledDown(ptrFrameLayout, lvGoodsList, header);
             }
 
             @Override
@@ -121,10 +155,19 @@ public class LayoutGoodsList {
         lvGoodsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = IntentFactory.getUploadGoodsActivity(context);
-                context.startActivity(intent);
+                Intent intent = IntentFactory.getUploadGoodsActivity(mContext);
+                mContext.startActivity(intent);
             }
         });
+    }
+
+    public void start() {
+        pflGoodsList.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pflGoodsList.autoRefresh(false);
+            }
+        }, 100);
     }
 
     /**
@@ -137,13 +180,17 @@ public class LayoutGoodsList {
         showViewState(ViewState.LOADING);
 
         BmobQuery<Goods> bmobQuery = new BmobQuery<>();
-        bmobQuery.addWhereEqualTo("goodsSort", goodsId);
+        if (sortId != null) {
+            bmobQuery.addWhereEqualTo("goodsSort", sortId);
+        }else {
+            bmobQuery.addWhereEqualTo(conditionId, condition);
+        }
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         bmobQuery.setMaxCacheAge(5 * 60 * 1000);
         bmobQuery.setLimit(PAGE_ITEM_COUNT);
         bmobQuery.order(order);
 
-        bmobQuery.findObjects(context, new FindListener<Goods>() {
+        bmobQuery.findObjects(mContext, new FindListener<Goods>() {
             @Override
             public void onSuccess(List<Goods> list) {
                 if (list.size() == 0) {
@@ -175,13 +222,18 @@ public class LayoutGoodsList {
     private void loadGoodsList() {
 
         BmobQuery<Goods> bmobQuery = new BmobQuery<>();
-        bmobQuery.addWhereEqualTo("goodsSort", goodsId);
+        if (sortId != null) {
+            bmobQuery.addWhereEqualTo("goodsSort", sortId);
+        }else {
+            bmobQuery.addWhereEqualTo(conditionId, condition);
+        }
+
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         bmobQuery.setMaxCacheAge(5 * 60 * 1000);
         bmobQuery.setLimit(PAGE_ITEM_COUNT);
         bmobQuery.setSkip(goodsListAdapter.getCount());
 
-        bmobQuery.findObjects(context, new FindListener<Goods>() {
+        bmobQuery.findObjects(mContext, new FindListener<Goods>() {
             @Override
             public void onSuccess(List<Goods> list) {
                 if (list.size() == 0) {

@@ -11,6 +11,10 @@
     </string-array>
 
     <string name="goods_list">商品列表</string>
+    <string name="my_goods">我的商品</string>
+
+    <string name="clear_cache">删除缓存</string>
+    <string name="check_update">检测更新</string>
 
     <string name="goods_price_htl">价格高到底</string>
     <string name="goods_price_lth">价格低到高</string>
@@ -32,10 +36,12 @@
 
     <!-- 运行提示-->
     <string name="registering">注册中</string>
+    <string name="loading">加载中</string>
+    <string name="logining">登录中</string>
     <string name="click_upload">点击上传</string>
     <string name="confirm_upload">确认上传</string>
     <string name="register_fail">注册失败</string>
-
+    <string name="not_login">您还未登录！</string>
 
     <string name="empty_tips">没有找到结果哦~</string>
     <string name="request_fail">请求失败!</string>
@@ -44,7 +50,6 @@
     <string name="register">注册</string>
 
     <!-- 登录输入-->
-    <string name="logining">登录中</string>
     <string name="login_success">登录成功</string>
     <string name="login_fail">登录失败</string>
 
