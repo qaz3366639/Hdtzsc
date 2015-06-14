@@ -24,9 +24,33 @@ public class Goods extends BmobObject {
 
     private String goodsImage4;
 
+    private String sortName;
+
     private goodsSortChild goodsSort;
 
     private goodsSort goodsParentSort;
+
+    private boolean shelve;
+
+    public String getSortName() {
+        return sortName;
+    }
+
+    public void setSortName(String sortName) {
+        this.sortName = sortName;
+    }
+
+    public void setShelve(boolean shelve) {
+        this.shelve = shelve;
+    }
+
+    public boolean isShelve() {
+        return shelve;
+    }
+
+    public void setIsUnShelve(boolean shelve) {
+        this.shelve = shelve;
+    }
 
     public org.hq.hdtzsc.bean.goodsSort getGoodsParentSort() {
         return goodsParentSort;

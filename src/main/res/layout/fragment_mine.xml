@@ -42,16 +42,20 @@
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/tvMyGoods"
+            android:id="@+id/tvUploadGoods"
+            style="@style/text_item"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@mipmap/ic_upload_goods"
+            android:text="@string/upload_goods"/>
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_height="1dp"
+            android:background="@color/app_shadow_bg" />
+
+        <TextView
+            android:id="@+id/tvMyGoods"
+            style="@style/text_item"
             android:drawableLeft="@mipmap/ic_my_goods_selected"
-            android:drawableRight="@mipmap/ic_jiantou_right"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/selector_text_item"
-            android:textColor="@android:color/black"
             android:text="@string/my_goods"/>
 
         <include layout="@layout/layout_goods_list" />

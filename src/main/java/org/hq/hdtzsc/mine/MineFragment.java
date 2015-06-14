@@ -14,6 +14,8 @@ import android.widget.TextView;
 import org.hq.hdtzsc.LoginActivity;
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
+import org.hq.hdtzsc.goods.GoodsDetailActivity;
+import org.hq.hdtzsc.goods.UploadGoodsActivity;
 import org.hq.hdtzsc.utils.ActivityStateCode;
 import org.hq.hdtzsc.utils.IntentFactory;
 import org.hq.hdtzsc.utils.LoginUtil;
@@ -36,6 +38,8 @@ public class MineFragment extends BaseFragment {
 
     private TextView tvMyGoods;
 
+    private TextView tvUploadGoods;
+
     private FrameLayout flGoodsList;
 
     private LayoutGoodsList layoutGoodsList;
@@ -48,7 +52,7 @@ public class MineFragment extends BaseFragment {
         btnLogin        = (Button) view.findViewById(R.id.btnLogin);
         tvMyGoods       = (TextView) view.findViewById(R.id.tvMyGoods);
         flGoodsList     = (FrameLayout) view.findViewById(R.id.flGoodsList);
-
+        tvUploadGoods   = (TextView) view.findViewById(R.id.tvUploadGoods);
         return view;
     }
 
@@ -68,14 +72,25 @@ public class MineFragment extends BaseFragment {
             llIsLogin.setVisibility(View.VISIBLE);
             llNotLogin.setVisibility(View.GONE);
 
-            layoutGoodsList = new LayoutGoodsList(flGoodsList, getActivity(), "userName",
-                    BmobUser.getCurrentUser(getActivity()).getObjectId());
+//            if (layoutGoodsList == null) {
+                layoutGoodsList = new LayoutGoodsList(flGoodsList, getActivity(), "userName",
+                        BmobUser.getCurrentUser(getActivity()).getObjectId());
+//            }
+
             layoutGoodsList.start();
 
             tvMyGoods.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     layoutGoodsList.start();
+                }
+            });
+
+            tvUploadGoods.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = IntentFactory.getUploadGoodsActivity(getActivity());
+                    startActivity(intent);
                 }
             });
         }

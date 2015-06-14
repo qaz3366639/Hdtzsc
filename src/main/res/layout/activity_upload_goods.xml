@@ -30,7 +30,7 @@
                 android:id="@+id/metGoodsName"
                 style="@style/edit_text_upload_goods"
                 app:met_minCharacters="1"
-                app:met_maxCharacters="30"
+                app:met_maxCharacters="50"
                 app:met_floatingLabelText="@string/input_goods_name"
                 android:hint="@string/input_goods_name"/>
 
@@ -69,10 +69,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:met_minCharacters="1"
-                android:inputType="none"
                 app:met_floatingLabelText="@string/choose_goods_sort"
+                app:met_baseColor="#0056d3"
+                app:met_floatingLabel="highlight"
+                app:met_singleLineEllipsis="true"
+                app:met_autoValidate="true"
                 android:hint="@string/choose_goods_sort"/>
-
             <org.rc.rclibrary.widget.NoScrollGridView
                 android:id="@+id/gvGoodsSort"
                 android:layout_width="match_parent"

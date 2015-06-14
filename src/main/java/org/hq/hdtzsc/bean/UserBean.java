@@ -12,7 +12,7 @@ public class UserBean extends BmobUser {
 
     private BmobFile userImage;
 
-    private Number mobilePhone;
+    private String mobilePhoneNumber;
 
     public BmobFile getUserImage() {
         return userImage;
@@ -22,11 +22,11 @@ public class UserBean extends BmobUser {
         this.userImage = userImage;
     }
 
-    public Number getMobilePhone() {
-        return mobilePhone;
+    public String getMobilePhoneNumber() {
+        return mobilePhoneNumber;
     }
 
-    public void setMobilePhone(Number mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setMobilePhoneNumber(String mobilePhoneNumber) {
+        this.mobilePhoneNumber = mobilePhoneNumber;
     }
 }

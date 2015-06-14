@@ -108,6 +108,10 @@ public class UploadGoodsActivity extends BaseActivity implements CropHandler{
     private String strGoodsId;
     private goodsSort goodsSort;
     private goodsSortChild goodsSortChild;
+    /**
+     * 需要修改信息的商品
+     */
+    private Goods mGoods;
 
 
     private final Uri IMAGE1_URI = Uri.fromFile(Environment.getExternalStorageDirectory())
@@ -231,6 +235,10 @@ public class UploadGoodsActivity extends BaseActivity implements CropHandler{
 
         uploadDialog      = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
 
+        mGoods = (Goods) getIntent().getSerializableExtra(GoodsDetailActivity.GOODS);
+
+        isUpdate();
+
         //初始化裁剪图片配置
         cropParams = new CropParams();
         cropParams.outputX = 480;
@@ -238,6 +246,21 @@ public class UploadGoodsActivity extends BaseActivity implements CropHandler{
 
         uploadDialog.setTitleText("").setContentText("选择获取图片方式")
                 .setConfirmText("打开相册").setCancelText("打开相机").setCancelable(true);
+    }
+
+    /**
+     * 判断是否是编辑商品模式
+     */
+    private void isUpdate() {
+        if (mGoods != null) {
+            strGoodsId     = mGoods.getObjectId();
+            goodsSortChild = mGoods.getGoodsSort();
+            goodsSortChild.setGoodsSortChildName(mGoods.getSortName());
+
+            metGoodsName.setText(mGoods.getGoodsName());
+            metGoodsPrice.setText(String.valueOf(mGoods.getGoodsPrice()));
+            metGetGoodsSort.setText(mGoods.getSortName());
+        }
     }
 
     /**
@@ -294,7 +317,7 @@ public class UploadGoodsActivity extends BaseActivity implements CropHandler{
     private void uploadGoodsInfo() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText(getString(R.string.logining));
+        pDialog.setTitleText(getString(R.string.loading));
         pDialog.setCancelable(false);
         pDialog.show();
 
@@ -304,6 +327,7 @@ public class UploadGoodsActivity extends BaseActivity implements CropHandler{
         goods.setGoodsName(metGoodsName.getText().toString());
         goods.setGoodsPrice(Float.valueOf(metGoodsPrice.getText().toString()));
         goods.setGoodsSort(goodsSortChild);
+        goods.setSortName(goodsSortChild.getGoodsSortChildName());
         goods.setGoodsParentSort(goodsSort);
         goods.setUserName(BmobUser.getCurrentUser(this, UserBean.class));
 

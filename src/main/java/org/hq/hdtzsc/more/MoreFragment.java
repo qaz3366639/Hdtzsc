@@ -89,6 +89,7 @@ public class MoreFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 BmobQuery.clearAllCachedResults(getActivity());
+                ToastFactory.clearCacheSuccess(getActivity());
             }
         });
 

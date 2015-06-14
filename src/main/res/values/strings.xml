@@ -12,6 +12,7 @@
 
     <string name="goods_list">商品列表</string>
     <string name="my_goods">我的商品</string>
+    <string name="goods_detail">商品详情</string>
 
     <string name="clear_cache">删除缓存</string>
     <string name="check_update">检测更新</string>
@@ -59,6 +60,9 @@
     <string name="input_email">输入邮箱地址</string>
 
     <!-- 上传商品-->
+    <string name="update_goods">修改商品</string>
+    <string name="shelve">上架</string>
+    <string name="unshelve">下架</string>
     <string name="upload_goods">上传商品</string>
     <string name="goods_basic_info">商品基本信息</string>
     <string name="input_goods_name">输入商品名称</string>
@@ -69,6 +73,7 @@
     <!-- 单位-->
     <string name="unit_yuan">元</string>
 
+    <string name="contact_seller">联系卖家</string>
     <string name="back">返回</string>
     <string name="input_username">输入账号</string>
     <string name="input_password">输入密码</string>

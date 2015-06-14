@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import org.hq.hdtzsc.LoginActivity;
 import org.hq.hdtzsc.RegisterActivity;
+import org.hq.hdtzsc.goods.GoodsDetailActivity;
 import org.hq.hdtzsc.goods.GoodsListActivity;
 import org.hq.hdtzsc.goods.UploadGoodsActivity;
 
@@ -30,4 +31,10 @@ public class IntentFactory {
     public static Intent getUploadGoodsActivity(Context context) {
         return new Intent(context, UploadGoodsActivity.class);
     }
+
+    public static Intent getGoodsDetailActivity(Context context) {
+        return new Intent(context, GoodsDetailActivity.class);
+    }
+
+
 }

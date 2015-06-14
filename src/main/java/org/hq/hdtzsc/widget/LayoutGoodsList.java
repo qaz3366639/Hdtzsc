@@ -10,9 +10,11 @@ import android.widget.RelativeLayout;
 
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.bean.Goods;
+import org.hq.hdtzsc.goods.GoodsDetailActivity;
 import org.hq.hdtzsc.goods.GoodsListAdapter;
 import org.hq.hdtzsc.utils.IntentFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -59,6 +61,7 @@ public class LayoutGoodsList {
      * 条件值
      */
     private String condition;
+    String order;
 
     private ViewState viewState = ViewState.LOADING;
 
@@ -131,7 +134,9 @@ public class LayoutGoodsList {
         //设置上拉加载更多的footer
         loadMoreListViewContainer = (LoadMoreListViewContainer) flGoodsList
                 .findViewById(R.id.load_more_list_view_container);
-        loadMoreListViewContainer.useDefaultHeader();
+        if (lvGoodsList.getFooterViewsCount() == 0) {
+            loadMoreListViewContainer.useDefaultHeader();
+        }
 
         loadMoreListViewContainer.setLoadMoreHandler(new LoadMoreHandler() {
             @Override
@@ -148,14 +153,15 @@ public class LayoutGoodsList {
 
             @Override
             public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
-                requestGoodsList(false, null);
+                requestGoodsList(false, order);
             }
         });
 
         lvGoodsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = IntentFactory.getUploadGoodsActivity(mContext);
+                Intent intent = IntentFactory.getGoodsDetailActivity(mContext);
+                intent.putExtra(GoodsDetailActivity.GOODS, goodsListAdapter.getData().get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -177,14 +183,26 @@ public class LayoutGoodsList {
      */
     public void requestGoodsList(final boolean isLoad, String order) {
 
+        this.order = order;
+
         showViewState(ViewState.LOADING);
 
-        BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        BmobQuery<Goods> bq1 = new BmobQuery<>();
+        BmobQuery<Goods> bq2 = new BmobQuery<>();
         if (sortId != null) {
-            bmobQuery.addWhereEqualTo("goodsSort", sortId);
-        }else {
-            bmobQuery.addWhereEqualTo(conditionId, condition);
+            bq1.addWhereEqualTo("goodsSort", sortId);
+            //未下架的商品
+            bq2.addWhereEqualTo("shelve", false);
+        } else {
+            bq1.addWhereEqualTo(conditionId, condition);
         }
+
+        //组装完整的and条件
+        List<BmobQuery<Goods>> andQuerys = new ArrayList<>();
+        andQuerys.add(bq1);
+        andQuerys.add(bq2);
+        BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        bmobQuery.and(andQuerys);
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         bmobQuery.setMaxCacheAge(5 * 60 * 1000);
         bmobQuery.setLimit(PAGE_ITEM_COUNT);
@@ -221,17 +239,27 @@ public class LayoutGoodsList {
 
     private void loadGoodsList() {
 
-        BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        BmobQuery<Goods> bq1 = new BmobQuery<>();
+        BmobQuery<Goods> bq2 = new BmobQuery<>();
         if (sortId != null) {
-            bmobQuery.addWhereEqualTo("goodsSort", sortId);
+            bq1.addWhereEqualTo("goodsSort", sortId);
+            //未下架的商品
+            bq2.addWhereEqualTo("shelve", false);
         }else {
-            bmobQuery.addWhereEqualTo(conditionId, condition);
+            bq1.addWhereEqualTo(conditionId, condition);
         }
 
+        //组装完整的and条件
+        List<BmobQuery<Goods>> andQuerys = new ArrayList<>();
+        andQuerys.add(bq1);
+        andQuerys.add(bq2);
+        BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        bmobQuery.and(andQuerys);
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         bmobQuery.setMaxCacheAge(5 * 60 * 1000);
         bmobQuery.setLimit(PAGE_ITEM_COUNT);
         bmobQuery.setSkip(goodsListAdapter.getCount());
+        bmobQuery.order(order);
 
         bmobQuery.findObjects(mContext, new FindListener<Goods>() {
             @Override

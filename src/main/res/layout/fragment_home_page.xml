@@ -28,6 +28,7 @@
                 android:layout_alignParentBottom="true"
                 app:stl_customTabTextLayoutId="@layout/item_home_page_ad_indicator"
                 app:stl_dividerThickness="0dp"
+                app:stl_underlineThickness="0dp"
                 app:stl_indicatorColor="@color/tab_selected"
                 app:stl_defaultTabTextHorizontalPadding="0dp"
                 app:stl_indicatorThickness="@dimen/home_page_ad_indicator_dia"

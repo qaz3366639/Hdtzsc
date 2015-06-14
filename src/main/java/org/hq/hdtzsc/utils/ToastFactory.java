@@ -49,4 +49,16 @@ public class ToastFactory {
     public static void checkYourNetWord(Context context) {
         Toast.makeText(context, "请先检测您的网络", Toast.LENGTH_SHORT).show();
     }
+
+    public static void requestFail(Context context) {
+        Toast.makeText(context, "请求失败，请重试", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void pleaseLogin(Context context) {
+        Toast.makeText(context, "请先登录账号!", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void clearCacheSuccess(Context context) {
+        Toast.makeText(context, "删除缓存成功!", Toast.LENGTH_SHORT).show();
+    }
 }

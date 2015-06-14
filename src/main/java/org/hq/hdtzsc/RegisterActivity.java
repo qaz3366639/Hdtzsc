@@ -87,12 +87,8 @@ public class RegisterActivity extends BaseActivity {
                     userBean.setUsername(metUserName.getText().toString());
                     userBean.setPassword(metPassWord.getText().toString());
                     userBean.setEmail(metEmail.getText().toString());
-                    try {
-                        userBean.setMobilePhone(NumberFormat.getInstance().parse(metMobilePhone
-                                .getText().toString()));
-                    } catch (ParseException p) {
-                        p.printStackTrace();
-                    }
+                    userBean.setMobilePhoneNumber(metMobilePhone
+                            .getText().toString());
                     userBean.signUp(RegisterActivity.this, new SaveListener() {
                         @Override
                         public void onSuccess() {

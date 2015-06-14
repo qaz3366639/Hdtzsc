@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        richard_personal {
+            keyAlias 'richard'
+            keyPassword 'qq040733'
+            storeFile file('C:/Android/richard_personal.jks')
+            storePassword 'qq040733'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
-
     defaultConfig {
         applicationId "org.hq.hdtzsc"
         minSdkVersion 15
@@ -15,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.richard_personal
         }
     }
 }
@@ -36,7 +44,7 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.3'
     //Optional: see how to use the utility.
     //    compile 'com.ogaclejapan.smarttablayout:utils-v13:1.1.3@aar'
-    compile project(':RCLibrary')
+    compile project(':rclibrary')
     compile project(':library')
     compile files('libs/universal-image-loader-1.9.3-with-sources.jar')
     compile files('libs/BmobSDK_V3.3.8_0521.jar')
