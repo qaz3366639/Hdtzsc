@@ -49,6 +49,8 @@ public class LayoutGoodsList {
     private ListView lvGoodsList;
 
     private GoodsListAdapter goodsListAdapter;
+
+    private MaterialHeader header;
     /**
      * 分类ID
      */
@@ -112,8 +114,8 @@ public class LayoutGoodsList {
 
     private void initView(FrameLayout flGoodsList, Context context) {
 
-        this.flGoodsList     = flGoodsList;
-        this.mContext          = context;
+        this.flGoodsList      = flGoodsList;
+        this.mContext         = context;
         this.goodsListAdapter = new GoodsListAdapter(context, R.layout.item_goods_list);
 
         rlEmpty      = (RelativeLayout) flGoodsList.findViewById(R.id.rlEmpty);
@@ -123,13 +125,15 @@ public class LayoutGoodsList {
         lvGoodsList.setAdapter(goodsListAdapter);
 
         //设置下拉刷新的head
-        final MaterialHeader header = new MaterialHeader(context);
-        int[] colors = mContext.getResources().getIntArray(R.array.google_colors);
-        header.setColorSchemeColors(colors);
-        header.setPadding(0, 30, 0, 30);
-        header.setPtrFrameLayout(pflGoodsList);
-        pflGoodsList.setHeaderView(header);
-        pflGoodsList.addPtrUIHandler(header);
+        if ((header = (MaterialHeader) pflGoodsList.getHeaderView()) == null) {
+            MaterialHeader header = new MaterialHeader(context);
+            int[] colors = mContext.getResources().getIntArray(R.array.google_colors);
+            header.setColorSchemeColors(colors);
+            header.setPadding(0, 30, 0, 30);
+            header.setPtrFrameLayout(pflGoodsList);
+            pflGoodsList.setHeaderView(header);
+            pflGoodsList.addPtrUIHandler(header);
+        }
 
         //设置上拉加载更多的footer
         loadMoreListViewContainer = (LoadMoreListViewContainer) flGoodsList
@@ -310,6 +314,10 @@ public class LayoutGoodsList {
                 rlFail.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    public PtrFrameLayout getPflGoodsList() {
+        return pflGoodsList;
     }
 
     public enum ViewState {

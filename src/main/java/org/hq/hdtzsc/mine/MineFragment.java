@@ -2,7 +2,6 @@ package org.hq.hdtzsc.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.hq.hdtzsc.LoginActivity;
 import org.hq.hdtzsc.R;
 import org.hq.hdtzsc.base.BaseFragment;
-import org.hq.hdtzsc.goods.GoodsDetailActivity;
-import org.hq.hdtzsc.goods.UploadGoodsActivity;
 import org.hq.hdtzsc.utils.ActivityStateCode;
 import org.hq.hdtzsc.utils.IntentFactory;
 import org.hq.hdtzsc.utils.LoginUtil;
@@ -72,10 +68,10 @@ public class MineFragment extends BaseFragment {
             llIsLogin.setVisibility(View.VISIBLE);
             llNotLogin.setVisibility(View.GONE);
 
-//            if (layoutGoodsList == null) {
+            if (layoutGoodsList == null) {
                 layoutGoodsList = new LayoutGoodsList(flGoodsList, getActivity(), "userName",
                         BmobUser.getCurrentUser(getActivity()).getObjectId());
-//            }
+            }
 
             layoutGoodsList.start();
 
@@ -94,6 +90,23 @@ public class MineFragment extends BaseFragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        layoutGoodsList = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        layoutGoodsList = null;
     }
 
     @Override

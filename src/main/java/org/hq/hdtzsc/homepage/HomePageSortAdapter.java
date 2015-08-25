@@ -40,7 +40,6 @@ public class HomePageSortAdapter extends RCBaseAdapter<goodsSort> {
 
     @Override
     protected void displayItem(RCBaseViewHolder viewHolder, int position) {
-        super.displayItem(viewHolder, position);
         ImageView ivSort    = viewHolder.getView(R.id.ivSort);
         TextView tvSortName = viewHolder.getView(R.id.tvSortName);
 

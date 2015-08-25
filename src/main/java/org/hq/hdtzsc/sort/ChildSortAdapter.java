@@ -21,7 +21,6 @@ public class ChildSortAdapter extends RCBaseAdapter<goodsSortChild> {
 
     @Override
     protected void displayItem(RCBaseViewHolder viewHolder, int position) {
-        super.displayItem(viewHolder, position);
         TextView tvSortName = viewHolder.getView(R.id.tvSortName);
         tvSortName.setText(data.get(position).getGoodsSortChildName());
     }

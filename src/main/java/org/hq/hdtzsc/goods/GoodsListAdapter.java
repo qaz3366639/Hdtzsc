@@ -24,7 +24,6 @@ public class GoodsListAdapter extends RCBaseAdapter<Goods> {
 
     @Override
     protected void displayItem(RCBaseViewHolder viewHolder, int position) {
-        super.displayItem(viewHolder, position);
         ImageView ivGoodsImage = viewHolder.getView(R.id.ivGoodsImage);
         TextView tvGoodsName = viewHolder.getView(R.id.tvGoodsName);
         TextView tvGoodsPrice = viewHolder.getView(R.id.tvGoodsPrice);
